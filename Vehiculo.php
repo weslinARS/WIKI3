@@ -56,13 +56,18 @@ class Vehiculo
                 $this->apellidoPropie = $arguments[1];
                 $this->DNI = $arguments[2];
             }
+            if (count($arguments) == 4){
+                $this->nomPropie = $arguments[0];
+                $this->apellidoPropie = $arguments[1];
+                $this->DNI = $arguments[2];
+                $this->matricula = $arguments[3];
+            }
         }
     }
-    public function setPropiedades($marca, $model, $matric, $anio)
+    public function setPropiedades($marca, $model, $anio)
     {
         $this->marca = $marca;
         $this->modelo = $model;
-        $this->matricula = $matric;
         if ($this->esNumero($anio) == 1) {
             $this->anioFabric = $anio;
         }
@@ -141,12 +146,4 @@ class Vehiculo
         }
     }
 }
-$v1 = new Vehiculo;
-$v1->set_marca("TOYOTA");
-$v1->set_anio("2022");
-$v1->tipoTransporte(); 
-$v1->tipoVehiculo(); 
-$v1->get_marca();
-$v1->get_anio();
-$v1->setPropietario('weslin', 'silva');
-$v1->get_propietario();
+
