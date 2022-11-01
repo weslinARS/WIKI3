@@ -41,7 +41,7 @@ class Vehiculo
         }
     }
     // ? METODOS SETTERS
-    public function __call($name, $arguments)
+    public function __call($name, $arguments) // Establece las propiedades para el propietario del vehiculo
     {
         if ($name = 'setPropietario') {
             if (count($arguments) == 1) {
@@ -56,7 +56,7 @@ class Vehiculo
                 $this->apellidoPropie = $arguments[1];
                 $this->DNI = $arguments[2];
             }
-            if (count($arguments) == 4){
+            if (count($arguments) == 4) {
                 $this->nomPropie = $arguments[0];
                 $this->apellidoPropie = $arguments[1];
                 $this->DNI = $arguments[2];
@@ -119,31 +119,53 @@ class Vehiculo
         echo 'Apellido Propietario: ' . ($this->apellidoPropie != '' ? $this->apellidoPropie : 'No añadido') . "<br>";
         echo 'DNI: ' . ($this->DNI != '' ? $this->DNI : 'No añadido') . "<br>";
     }
+    public function get_CantPasajero() {
+		echo "Cantidad de pasajeros : ". $this->cantPasajero;
+	}
+    public function getAtributosTotales()
+    {
+        echo "<hr>";
+        $this->tipoVehiculo(); 
+        echo "<h3 style = 'color: blue;'>Propietario</h3>";
+        $this->get_propietario();
+        echo "<h3 style = 'color: blue;'>Información Vehículo</h3>";
+        $this->get_marca();
+        $this->get_modelo();
+        $this->get_anio();
+        if ($this->matricula != '') {
+            $this->get_matricula();
+        }
+        $this->tipoTransporte();
+    }
     //* METODOS GENERALES
-    public function tipoTransporte(){
-        if($this->cantPasajero != 0){
-            if($this->cantPasajero <= 5){
-                echo "Este vehiculo es privado <br>";
-            }else{
-                echo "Este vehiculo es público <br>";
+    public function tipoTransporte()
+    {
+        if ($this->cantPasajero != 0) {
+            if ($this->cantPasajero <= 5) {
+                echo "<span style='color : red ; '>Este vehiculo es privado</span> <br>";
+            } else {
+                echo "<span style='color : red ; '>Este vehiculo es público</span> <br>";
             }
-        }else{
+        } else {
             throw new Exception('No se definio la cantidad de pasajeros ');
         }
     }
-    public function tipoVehiculo(){
-        if($this->cantPasajero != 0){
-            if($this -> cantPasajero <= 100){
-                echo "AUTOBUS. <br>";
-            }elseif($this->cantPasajero > 100 && $this->cantPasajero <= 555){
-                echo "AVION. <br>";
+    public function tipoVehiculo()
+    {
+        if ($this->cantPasajero != 0) {
+            if ($this->cantPasajero <= 5) {
+                echo "<span style='color: tomato; '>Coche</span> <br>";
+            }else if ($this->cantPasajero > 5 && $this->cantPasajero <= 100) {
+                echo "<span style='color: tomato; '>Autobus</span> <br>";
+            } elseif ($this->cantPasajero > 100 && $this->cantPasajero <= 555) {
+                echo "<span style='color: tomato; '>Avión</span> <br>";
+            } elseif ($this->cantPasajero > 555 &&  $this->cantPasajero <= 30000) {
+                echo "<span style='color: tomato; '>Barco</span> <br>";
             }
-            elseif($this-> cantPasajero > 555 &&  $this->cantPasajero <= 30000){
-                echo "BARCO. <br>";
-            }
-        }else{
+        } else {
             throw new Exception('No se definio la cantidad de pasajeros ');
         }
     }
-}
 
+	
+}
