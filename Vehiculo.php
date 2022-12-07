@@ -1,13 +1,14 @@
 <?php
 
 
-function excepcionPerson($error)
+function excepcionPerson($error) // funcion para mostar correctamente los errores en el proceso del llamado a los métodos de los objetos 
 {
     echo $error->getMessage() . PHP_EOL;
 }
 set_exception_handler('excepcionPerson');
-class Vehiculo
+class Vehiculo // creacion de una superClase Vehículo
 {
+    // * declaración de los atributos  con el modificador de accesp private para la superclase Vehículo()
     private string $matricula;
     private string $marca;
     private string $modelo;
@@ -17,6 +18,7 @@ class Vehiculo
     private string $DNI;
     private int $cantPasajero;
 
+    //* definicion de un constructor para inicializar los atributos del objeto
     public function __construct()
     {
         $this->anioFabric = 0;
@@ -28,6 +30,7 @@ class Vehiculo
         $this->DNI = '';
         $this->cantPasajero = 0;
     }
+    // * método privado para 
     private function esNumero($dato) // para evaluar que el dato ingresado sea correctamente un numero 
     {
         if (!is_numeric($dato)) {
@@ -41,7 +44,7 @@ class Vehiculo
         }
     }
     // ? METODOS SETTERS
-    public function __call($name, $arguments) // Establece las propiedades para el propietario del vehiculo
+    public function __call($name, $arguments) // Establece las propiedades para el propietario del vehiculo utilizando sobrecarga de métodos
     {
         if ($name = 'setPropietario') {
             if (count($arguments) == 1) {
@@ -64,7 +67,7 @@ class Vehiculo
             }
         }
     }
-    public function setPropiedades($marca, $model, $anio)
+    public function setPropiedades($marca, $model, $anio) // método setter para las propiedades de un auto 
     {
         $this->marca = $marca;
         $this->modelo = $model;
@@ -72,15 +75,15 @@ class Vehiculo
             $this->anioFabric = $anio;
         }
     }
-    public function set_matricula(string $matr)
+    public function set_matricula(string $matr) // método setter para la la propiedad matricula 
     {
         $this->matricula = $matr;
     }
-    public function set_marca(string $Marca)
+    public function set_marca(string $Marca) // método setter para la propiedad marca del vehículo
     {
         $this->marca = $Marca;
     }
-    public function set_modelo(string $Modelo)
+    public function set_modelo(string $Modelo)// método setter para la propiedad modelo  del vehículo
     {
         $this->modelo = $Modelo;
     }
@@ -90,7 +93,7 @@ class Vehiculo
             $this->anioFabric = $anio;
         }
     }
-    function set_CantPasajero($cantPasajero)
+    function set_CantPasajero($cantPasajero) //funcion setter para la cantidad de pasajeros con restricciones 
     {
         if ($this->esNumero($cantPasajero) == 1) {
             $this->cantPasajero = $cantPasajero;
@@ -119,13 +122,14 @@ class Vehiculo
         echo 'Apellido Propietario: ' . ($this->apellidoPropie != '' ? $this->apellidoPropie : 'No añadido') . "<br>";
         echo 'DNI: ' . ($this->DNI != '' ? $this->DNI : 'No añadido') . "<br>";
     }
-    public function get_CantPasajero() {
-		echo "Cantidad de pasajeros : ". $this->cantPasajero;
-	}
+    public function get_CantPasajero()
+    {
+        echo "Cantidad de pasajeros : " . $this->cantPasajero;
+    }
     public function getAtributosTotales()
     {
         echo "<hr>";
-        $this->tipoVehiculo(); 
+        $this->tipoVehiculo();
         echo "<h3 style = 'color: blue;'>Propietario</h3>";
         $this->get_propietario();
         echo "<h3 style = 'color: blue;'>Información Vehículo</h3>";
@@ -155,7 +159,7 @@ class Vehiculo
         if ($this->cantPasajero != 0) {
             if ($this->cantPasajero <= 5) {
                 echo "<span style='color: tomato; '>Coche</span> <br>";
-            }else if ($this->cantPasajero > 5 && $this->cantPasajero <= 100) {
+            } else if ($this->cantPasajero > 5 && $this->cantPasajero <= 100) {
                 echo "<span style='color: tomato; '>Autobus</span> <br>";
             } elseif ($this->cantPasajero > 100 && $this->cantPasajero <= 555) {
                 echo "<span style='color: tomato; '>Avión</span> <br>";
@@ -166,6 +170,4 @@ class Vehiculo
             throw new Exception('No se definio la cantidad de pasajeros ');
         }
     }
-
-	
 }

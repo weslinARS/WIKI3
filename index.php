@@ -14,5 +14,4 @@ $Avion1->setPropietario('Copa Airlines');
 $Avion1->set_cantTurbinas(-120);
 $Avion1->set_CantPasajero(400);
 $Avion1->set_tipoCombustible('Jet-A');
-var_dump($Avion1);
 $Avion1->getAtributosTotales(); 

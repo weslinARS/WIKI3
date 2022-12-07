@@ -1,9 +1,10 @@
 <?php
 require_once './Vehiculo.php';
-interface combustibles{
+interface combustibles{ // interfaz con los tipos de combustibles para un Avion()
     const Tcombustibles = ['JET-A','JET-B','MOGAS','AVGAS','BIOQUEROSENO'];
 }
-class Avion extends Vehiculo implements combustibles{
+class Avion extends Vehiculo implements combustibles{ // sub clase Avion que hereda de la superclase e implementa la interfaz combustible 
+    //* declaracion 
     private int $cantTurbinas; 
     private float $velocidad = 0; 
     private string $tipoCombustible = ''  ; 
@@ -14,7 +15,7 @@ class Avion extends Vehiculo implements combustibles{
         $this->cantTurbinas = 0 ; 
         $this->velocidad = 0; 
     }
-    public function set_tipoCombustible($comb){
+    public function set_tipoCombustible($comb){ // se tipo de combustibles con restricciones para validar la insercion correcta del dato
         foreach (combustibles::Tcombustibles as $combustible){
             if(strtoupper($comb) == $combustible){
                 $this->tipoCombustible = $comb; 
